@@ -11,6 +11,7 @@ email['to'] = input('Enter destination email address: ')
 email['subject'] = input('Enter email subject: ')
 content = input('Enter email content: ')
 email.set_content(content)
+sender = email['from']
 
 # auth - change to dynamic TO-DO
 with smtplib.SMTP(host=f'smtp.gmail.com', port=587) as smtp:
@@ -19,6 +20,6 @@ with smtplib.SMTP(host=f'smtp.gmail.com', port=587) as smtp:
     # connect server
     smtp.starttls()
     # login
-    smtp.login(f'{email['from']}, '{password}')
+    smtp.login(f'{sender}', f'{password}')
     smtp.send_message(email)
 
