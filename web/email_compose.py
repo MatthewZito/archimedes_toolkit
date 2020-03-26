@@ -4,11 +4,15 @@ from email.message import EmailMessage
 # instantiate email object
 email = EmailMessage
 
+# TO-DO NEEDS FIX
 # solicit input vals for said obj
-email['from'] = input('Enter your email address: ')
+from_address = input('Enter your email address: ')
+to_address = input('Enter destination email address: ')
+subject = input('Enter email subject: ')
+email['from'] = from_address
 password = input('Enter your password: ')
-email['to'] = input('Enter destination email address: ')
-email['subject'] = input('Enter email subject: ')
+email['to'] = to_address
+email['subject'] = subject
 content = input('Enter email content: ')
 email.set_content(content)
 sender = email['from']
