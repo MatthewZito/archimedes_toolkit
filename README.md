@@ -23,4 +23,4 @@ Anyway, it'd be simple to just utilize `curl` or `wget` (I went with the superio
 
 Now, when the two vars do not eval to true, we use `sendEmail` to email ourselves an alert. Excellent. No worrying about coordinating timezones and missing the next vinyl release :D
 
-Note: the two variables are instantiated in the home directory as `old.html` and `new.html`.
+Note the two variables are instantiated in the home directory as `old.html` and `new.html`. It is preferable to run this script as a cron job; we can push it into the bg and check it periodically. 
