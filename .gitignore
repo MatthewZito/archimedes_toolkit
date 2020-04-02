@@ -4,3 +4,4 @@ scripting/__pycache__/email.cpython-37.pyc
 test.js
 .DS_Store
 chromedriver
+bots/config.json
