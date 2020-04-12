@@ -37,11 +37,18 @@ const processCommand = (userTransmittedCommand) => {
     else if (primaryCommand == "search") {
         search(arguments, userTransmittedCommand)
     }
+    else if (primaryCommand == "motto") {
+        motto(userTransmittedCommand)
+    }
     else {
         userTransmittedCommand.channel.send("Diagnostic recommended")
     }
 }
 
+
+const motto = (userTransmittedCommand) => {
+    userTransmittedCommand.channel.send("Study! Study! Study!")
+}
 // fetch uptime
 const heartbeat = (userTransmittedCommand) => {
     let totalSeconds = (client.uptime / 1000);
