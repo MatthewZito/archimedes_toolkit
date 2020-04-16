@@ -1,7 +1,10 @@
 ## Table of Contents
 
-[Introduction](#intro) 
-[How it Works: Extensive Password Validation w/SHA1, SHA256, MD5](#passvalidator)
+ - [Introduction](#intro) 
+ - [How it Works: Extensive Password Validation w/SHA1, SHA256, MD5](#passvalidator)
+ - [How it Works: Automated Web Monitoring](#shmonitor)
+ - [Archimedes Pentesting Suite](#security)
+ - [How it Works: MAC Changer](#macchanger)
 
 ### <a name="intro"></a> Introduction
 This directory contains several custom utilities spanning myriad domains, among them scripting, validation, general I/O applications, and web plugins.
@@ -17,7 +20,7 @@ The validator is interesting and I'm pleased with my implementation. Passwords g
 
 We strip to five chars because we don't actually want to make an API request that submits our actual full pass to the remote service. What happens, then, is the API validates against the first five chars of our hashed pass. Then, it returns all matches, which we loop through and match against our full pass (we store the tail in a local variable). This way, actual full pass validation is done locally in our cache. Passes only exist for the session.
 
-# How it Works: Automated Data Monitoring ([monitor.sh](https://github.com/MatthewZito/utils/blob/master/web-utils/monitor.sh))
+### <a name="shmonitor"></a> How it Works: Automated Web Monitoring ([monitor.sh](https://github.com/MatthewZito/utils/blob/master/web-utils/monitor.sh))
 
 Monitor is a dynamic-input shell script which is intrinsically quite simple but in execution readily subject to the whims of UNIX, cron, and processes. I wrote Monitor after DD missed another record release from her favorite musician. I thought "let's just make a cron job that monitors the page for updates."
 
@@ -29,18 +32,20 @@ Now, when the two vars do not eval to true, we use `sendEmail` to email ourselve
 
 Note the two variables are instantiated in the home directory as `old.html` and `new.html`. It is preferable to run this script as a cron job; we can push it into the bg and check it periodically. We can do this with `nohup ./monitor.sh &`.
 
-# Security and Penetration Testing Suite
+## <a name="security"></a> Security and Penetration Testing Suite
 There is, in the web utilities directory (/web-utils), a sub-directory dedicated to pen-testing tools. These programs should only be used for research purposes, and never an illegal capacity.
 
 That said, let's explore how some of these programs I wrote work:
 
-## How it Works: MAC Address Changer
+### <a name="macchanger"></a>  How it Works: MAC Address Changer
 
 MAC (Media Access Control) is a permanent, physical, and unique address assigned to network interfaces by device manufacturers. This means even your wireless card, for instance, has its own unique MAC address.
 
 The MAC address, akin to an IP on the internet, is utilized within a network in order to facilitate the proper delivery of resources and data (i.e. packets). An interaction will generally consist of a source MAC and a destination MAC. MAC addresses can identify you, be filtered, or otherwise access-restricted.
 
 Important to note is these unique addresses are not ephemeral; they are persistent and will remain associated with a device were a user to install it in another machine. But they don't have to be inextricably intertwined...
+
+
 
 
 
