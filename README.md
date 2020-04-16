@@ -1,6 +1,7 @@
 ## Table of Contents
 
-[Introduction](#intro)
+[Introduction](#intro) 
+[How it Works: Extensive Password Validation w/SHA1, SHA256, MD5](#passvalidator)
 
 ### <a name="intro"></a> Introduction
 This directory contains several custom utilities spanning myriad domains, among them scripting, validation, general I/O applications, and web plugins.
@@ -10,7 +11,7 @@ They may be of use to you. Otherwise, I store these programs and scripts here so
 
 For the remainder of this documentation, I will discuss the more interesting (in my opinion, anyway) among these tools, outlining their design, usage, and implementation theory. If you would like to know more about a program I have yet to document with such a degree of granularity, do let me know and I will add it to this README.
 
-# How it Works: Extensive Password Validation w/SHA1, SHA256, MD5 ([pass_validator.py](https://github.com/MatthewZito/utils/blob/master/scripting/pass_validator.py))
+### <a name="passvalidator"></a> How it Works: Extensive Password Validation w/SHA1, SHA256, MD5 ([pass_validator.py](https://github.com/MatthewZito/utils/blob/master/scripting/pass_validator.py))
 
 The validator is interesting and I'm pleased with my implementation. Passwords get leaked all the time. My validator accepts as input your actual passes. It first encrypts the pass with SHA1, or MD5 if we are checking against your wireless network (perhaps someone captured a 4-way handshake and has the MD5 hash to your network). Then, the validator strips the hashed pass to five chars, and makes an API call to HaveIBeenPwnd?, perhaps the most robust open database of broken passes. 
 
@@ -40,6 +41,7 @@ MAC (Media Access Control) is a permanent, physical, and unique address assigned
 The MAC address, akin to an IP on the internet, is utilized within a network in order to facilitate the proper delivery of resources and data (i.e. packets). An interaction will generally consist of a source MAC and a destination MAC. MAC addresses can identify you, be filtered, or otherwise access-restricted.
 
 Important to note is these unique addresses are not ephemeral; they are persistent and will remain associated with a device were a user to install it in another machine. But they don't have to be inextricably intertwined...
+
 
 
 
