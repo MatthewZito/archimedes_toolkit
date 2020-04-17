@@ -5,6 +5,7 @@
  - [How it Works: Automated Web Monitoring](#shmonitor)
  - [Archimedes Pentesting Suite](#security)
  - [How it Works: MAC Changer](#macchanger)
+ - [How it Works: ARP-driven Network Scanner](#networkscanner)
 
 ### <a name="intro"></a> Introduction
 This directory contains several custom utilities spanning myriad domains, among them scripting, validation, general I/O applications, and web plugins.
@@ -57,3 +58,13 @@ It's rather nice; give it a try.
 Update: I've crossed off another TODO - I added a MAC address generator option. By using the `--auto` option in lieu of a specific MAC address, the program will generate a valid MAC address per IEEE specifications. Soon, I will add an option that allows the user to specify a vendor prefix for MAC generation. This is becoming a great Layer 2 solution.
 
 Update 0.2.0: I'm excited to have implemented extended functionality for generating not only wholly random (and valid) MAC addresses, but MAC addresses which either begin with a specific vendor prefix (OUI), or are generated with multicast and/or UAA options. These options trigger byte-code logic in the generator method, which are augmented per IEEE specifications. Learn more about MAC addresses [here](https://en.wikipedia.org/wiki/Organizationally_unique_identifier#Bit-reversed_representation).
+
+
+### <a name="networkscanner"></a>  How it Works: ARP-Based Network Scanner ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/network_scanner.py))
+
+The network scanner is another very useful tool, and a formidable one when used in conjunction with the aforementioned MAC changer. This scanner utilizes ARP request functionality by accepting as user input a valid ipv4 or ipv6 IP address and accompanying - albeit optional - subnet range. 
+
+The program then takes the given IP and/or range, validates them per IEEE
+specifications (again, this validation is run against ipv4 and ipv6 standards). Finally, a broadcast object is instantiated with the given IP and a generated ethernet frame; this object returns to us a list of all connected devices within the given network and accompanying range, mapping their IPs to respective MAC addresses.
+
+The program outputs a table with these associations, which then might be used as input for the MAC changer should circumstances necessitate it.
