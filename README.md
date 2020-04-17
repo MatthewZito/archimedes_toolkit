@@ -37,7 +37,9 @@ There is, in the web utilities directory (/web-utils), a sub-directory dedicated
 
 That said, let's explore how some of these programs I wrote work:
 
-### <a name="macchanger"></a>  How it Works: MAC Address Changer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/web-utils/pentesting/mac_changer.py))
+### <a name="macchanger"></a>  How it Works: 48-bit MAC Address Changer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/web-utils/pentesting/mac_changer.py))
+
+NOTE: This tool is for 48-bit MACs, with a %02x default byte format.
 
 MAC (Media Access Control) is a permanent, physical, and unique address assigned to network interfaces by device manufacturers. This means even your wireless card, for instance, has its own unique MAC address.
 
@@ -53,3 +55,5 @@ What I enjoy about this program, however, is the security it affords the user. I
 It's rather nice; give it a try.
 
 Update: I've crossed off another TODO - I added a MAC address generator option. By using the `--auto` option in lieu of a specific MAC address, the program will generate a valid MAC address per IEEE specifications. Soon, I will add an option that allows the user to specify a vendor prefix for MAC generation. This is becoming a great Layer 2 solution.
+
+Update 0.2.0: I'm excited to have implemented extended functionality for generating not only wholly random (and valid) MAC addresses, but MAC addresses which either begin with a specific vendor prefix (OUI), or are generated with multicast and/or UAA options. These options trigger byte-code logic in the generator method, which are augmented per IEEE specifications. Learn more about MAC addresses [here](https://en.wikipedia.org/wiki/Organizationally_unique_identifier#Bit-reversed_representation).
