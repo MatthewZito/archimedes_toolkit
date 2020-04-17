@@ -6,3 +6,4 @@ test.js
 chromedriver
 bots/config.json
 *_config.json
+*mac_table.py

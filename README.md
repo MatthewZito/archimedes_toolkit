@@ -37,7 +37,7 @@ There is, in the web utilities directory (/web-utils), a sub-directory dedicated
 
 That said, let's explore how some of these programs I wrote work:
 
-### <a name="macchanger"></a>  How it Works: 48-bit MAC Address Changer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/web-utils/pentesting/mac_changer.py))
+### <a name="macchanger"></a>  How it Works: 48-bit MAC Address Changer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/mac_changer.py))
 
 NOTE: This tool is for 48-bit MACs, with a %02x default byte format.
 
