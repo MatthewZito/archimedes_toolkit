@@ -6,6 +6,7 @@
  - [Archimedes Pentesting Suite](#security)
  - [How it Works: MAC Changer](#macchanger)
  - [How it Works: ARP-driven Network Scanner](#networkscanner)
+ - [How it Works: Automated ARP Spoofing](#arpspoof)
 
 ### <a name="intro"></a> Introduction
 This directory contains several custom utilities spanning myriad domains, among them scripting, validation, general I/O applications, and web plugins.
@@ -15,9 +16,9 @@ They may be of use to you. Otherwise, I store these programs and scripts here so
 
 For the remainder of this documentation, I will discuss the more interesting (in my opinion, anyway) among these tools, outlining their design, usage, and implementation theory. If you would like to know more about a program I have yet to document with such a degree of granularity, do let me know and I will add it to this README.
 
-### <a name="passvalidator"></a> How it Works: Extensive Password Validation w/SHA1, SHA256, MD5 ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/scripting/pass_validator.py))
+### <a name="passvalidator"></a> How it Works: Extensive Password Validation w/SHA1, SHA256, MD5 ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/automation/pass_validator.py))
 
-The validator is interesting and I'm pleased with my implementation. Passwords get leaked all the time. My validator accepts as input your actual passes. It first encrypthttps://github.com/MatthewZito/archimedes_toolkit/blob/master/scripting/pass_validator.pys the pass with SHA1, or MD5 if we are checking against your wireless network (perhaps someone captured a 4-way handshake and has the MD5 hash to your network). Then, the validator strips the hashed pass to five chars, and makes an API call to HaveIBeenPwnd?, perhaps the most robust open database of broken passes. 
+The validator is interesting and I'm pleased with my implementation. Passwords get leaked all the time. My validator accepts as input your actual passes. It first encrypthttps://github.com/MatthewZito/archimedes_toolkit/blob/master/automation/pass_validator.pys the pass with SHA1, or MD5 if we are checking against your wireless network (perhaps someone captured a 4-way handshake and has the MD5 hash to your network). Then, the validator strips the hashed pass to five chars, and makes an API call to HaveIBeenPwnd?, perhaps the most robust open database of broken passes. 
 
 We strip to five chars because we don't actually want to make an API request that submits our actual full pass to the remote service. What happens, then, is the API validates against the first five chars of our hashed pass. Then, it returns all matches, which we loop through and match against our full pass (we store the tail in a local variable). This way, actual full pass validation is done locally in our cache. Passes only exist for the session.
 
@@ -68,3 +69,11 @@ The program then takes the given IP and/or range, validates them per IEEE
 specifications (again, this validation is run against ipv4 and ipv6 standards). Finally, a broadcast object is instantiated with the given IP and a generated ethernet frame; this object returns to us a list of all connected devices within the given network and accompanying range, mapping their IPs to respective MAC addresses.
 
 The program outputs a table with these associations, which then might be used as input for the MAC changer should circumstances necessitate it.
+
+### <a name="arpspoof"></a>  How it Works: Automated ARP Spoofing ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/arp_spoof.py))
+
+The ARP Spoof program enables us to redirect the flow of packets in a given network by simulateously manipulating the ARP tables of a given target client and its network's gateway. This program auto-enables port forwarding during this process, and dynamically constructs and sends ARP packets.  
+
+When the program is terminated by the user, the targets' ARP tables are reset, so as not to leave the controller in a precarous situation (plus, it's the nice thing to do). 
+
+Because this program places the controller in the middle of the packet-flow between the client and AP, the controller therefore has access to all dataflow (dealing with potential encryption of said data is a task for another script). From here, our myriad options for packet-flow orchestration become readily apparent: surrogation of code by way of automation and regex matching, forced 300-status redirects, remote access, et al.
