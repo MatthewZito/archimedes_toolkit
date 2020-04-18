@@ -1,3 +1,6 @@
+# The Archimedes Toolkit 
+![version](https://img.shields.io/badge/version-0.2.0-blue)
+
 ## Table of Contents
 
  - [Introduction](#intro) 
@@ -65,7 +68,7 @@ Update 0.2.0: I'm excited to have implemented extended functionality for generat
 
 The network scanner is another very useful tool, and a formidable one when used in conjunction with the aforementioned MAC changer. This scanner utilizes ARP request functionality by accepting as user input a valid ipv4 or ipv6 IP address and accompanying - albeit optional - subnet range. 
 
-The program then takes the given IP and/or range, validates them per IEEE
+The program then takes the given IP and/or range, then validates them per IEEE
 specifications (again, this validation is run against ipv4 and ipv6 standards). Finally, a broadcast object is instantiated with the given IP and a generated ethernet frame; this object returns to us a list of all connected devices within the given network and accompanying range, mapping their IPs to respective MAC addresses.
 
 The program outputs a table with these associations, which then might be used as input for the MAC changer should circumstances necessitate it.
