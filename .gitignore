@@ -8,3 +8,4 @@ bots/config.json
 *_config.json
 *mac_table.py
 *hello.txt
+*.vscode
