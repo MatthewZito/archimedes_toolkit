@@ -80,3 +80,9 @@ The ARP Spoof program enables us to redirect the flow of packets in a given netw
 When the program is terminated by the user, the targets' ARP tables are reset, so as not to leave the controller in a precarous situation (plus, it's the nice thing to do). 
 
 Because this program places the controller in the middle of the packet-flow between the client and AP, the controller therefore has access to all dataflow (dealing with potential encryption of said data is a task for another script). From here, our myriad options for packet-flow orchestration become readily apparent: surrogation of code by way of automation and regex matching, forced 300-status redirects, remote access, et al.
+
+### <a name="packetsniff"></a>  How it Works: HTTP Packet Sniffer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/packet_sniffer.py))
+
+The packet sniffer is an excellent program to execute after running the ARP Spoofer; it creates a dataflow of all intercepted HTTP packets' data which includes either URLs, or possible user credentials. 
+
+The scipt is extensible and can accomodate a variety of protocols by instantiating the listener object with one of many available filters.
