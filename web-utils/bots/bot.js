@@ -34,8 +34,8 @@ const processCommand = (userTransmittedCommand) => {
     else if (primaryCommand == "countdown") {
         countdown(arguments, userTransmittedCommand)
     }
-    else if (primaryCommand == "search") {
-        search(arguments, userTransmittedCommand)
+    else if (primaryCommand == "babygirl") {
+        world(userTransmittedCommand)
     }
     else if (primaryCommand == "motto") {
         motto(userTransmittedCommand)
@@ -49,6 +49,11 @@ const processCommand = (userTransmittedCommand) => {
 const motto = (userTransmittedCommand) => {
     userTransmittedCommand.channel.send("Study! Study! Study!")
 }
+
+const world = (userTransmittedCommand) => {
+    userTransmittedCommand.channel.send("In the whole, wide world!")
+}
+
 // fetch uptime
 const heartbeat = (userTransmittedCommand) => {
     let totalSeconds = (client.uptime / 1000);
@@ -69,7 +74,7 @@ const countdown = (arguments, userTransmittedCommand) => {
         seconds = arguments
     } 
     else {
-        seconds = 10
+        seconds = 5
     }
     interval = setInterval(() => {
         userTransmittedCommand.channel.send(`Time remaining: ${seconds}`)
