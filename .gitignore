@@ -9,3 +9,4 @@ bots/config.json
 *mac_table.py
 *hello.txt
 *.vscode
+*pyc
