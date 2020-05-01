@@ -93,3 +93,5 @@ The scipt is extensible and can accomodate a variety of protocols by instantiati
 Seems these scripts I've been writing have manifested something new in its own right; I have been drafting the system architecture for a tool which aggregates all of the utilities, payloads, and compilers currently being added to the pentesting sub-directory here in this repository.
 
 You may notice many of these scripts are not yet optimized. Payload code has not been obfuscated, connections are left unencrypted, and many of the programs should be classes. These are tasks I am putting off until I have finished writing all base payloads and utils. Only then will I best be able to plan an object-oriented architecture under which to organize all of this as a single, open-source utility.
+
+**The pentesting scripts have been aggregated into a CLI called Brutus. The repo is on this account.**

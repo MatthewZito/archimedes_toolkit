@@ -10,3 +10,4 @@ bots/config.json
 *hello.txt
 *.vscode
 *pyc
+*.env
