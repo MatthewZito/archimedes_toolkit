@@ -58,11 +58,11 @@ class Cyrus(discord.Client):
                     await message.channel.send("[+] Embedding data into image binary...")
                     print("[+] Embedding data into image binary...")
                 except Exception as stderr:
-                    await message.channel.send("[-] An error occurred during encoding. Try using a different image.")
+                    await message.channel.send("[-] An error occurred during encoding. Try using a PNG.")
                     print(f"[-] An error occurred during encoding. See {stderr}")
                 # send new file
                 try:
-                    await message.channel.send(file=discord.File(filename), content="[+] Provided data has been embedded in this image's binary.")
+                    await message.channel.send(file=discord.File(filename), content="[+] Provided data has been embedded in this image's binary:")
                     print("[+] Successful upload.")
                 except Exception as stderr:
                     await message.channel.send("[-] An error occurred during file upload.")
