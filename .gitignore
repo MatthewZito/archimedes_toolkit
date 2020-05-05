@@ -1,6 +1,6 @@
 scripting/images/
 scripting/pngs/
-scripting/__pycache__/email.cpython-37.pyc
+*pyc
 test.js
 .DS_Store
 chromedriver
