@@ -6,10 +6,6 @@
  - [Introduction](#intro) 
  - [How it Works: Extensive Password Validation w/SHA1, SHA256, MD5](#passvalidator)
  - [How it Works: Automated Web Monitoring](#shmonitor)
- - [Archimedes Pentesting Suite](#security)
- - [How it Works: MAC Changer](#macchanger)
- - [How it Works: ARP-driven Network Scanner](#networkscanner)
- - [How it Works: Automated ARP Spoofing](#arpspoof)
  - [Development Notes](#notes)
 
 ### <a name="intro"></a> Introduction
@@ -38,58 +34,5 @@ Now, when the two vars do not eval to true, we use `sendEmail` to email ourselve
 
 Note the two variables are instantiated in the home directory as `old.html` and `new.html`. It is preferable to run this script as a cron job; we can push it into the bg and check it periodically. We can do this with `nohup ./monitor.sh &`.
 
-## <a name="security"></a> Security and Penetration Testing Suite
-There is, in the web utilities directory (/web-utils), a sub-directory dedicated to pen-testing tools. These programs should only be used for research purposes, and never an illegal capacity.
-
-That said, let's explore how some of these programs I wrote work:
-
-### <a name="macchanger"></a>  How it Works: 48-bit MAC Address Changer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/mac_changer.py))
-
-NOTE: This tool is for 48-bit MACs, with a %02x default byte format.
-
-MAC (Media Access Control) is a permanent, physical, and unique address assigned to network interfaces by device manufacturers. This means even your wireless card, for instance, has its own unique MAC address.
-
-The MAC address, analogous to an IP on the internet, is utilized within a network in order to facilitate the proper delivery of resources and data (i.e. packets). An interaction will generally consist of a source MAC and a destination MAC. MAC addresses can identify you, be filtered, or otherwise access-restricted.
-
-Important to note is these unique addresses are not ephemeral; they are persistent and will remain associated with a device were a user to install it in another machine. But the two don't have to be inextricably intertwined...
-
-The MAC Address Changer (I'll come up with a more *nix-like name later) will
-accept as user-provided arguments any given wireless device and any valid MAC address to which the user wishes to reassign said device. The program is simple such that I need not explain it much further: it utilizes the subprocess module to automate the sequence of the necessary shell commands to bring the wireless interface down, reassign the MAC, and reinitialize it. 
-
-What I enjoy about this program, however, is the security it affords the user. If you are actively changing your MAC address, it might be prudent to have some sort of validation structure or higher order method to ensure that 1) the wireless device exists, 2) the wireless device accommodates a MAC address, 3) the user-input MAC address is of a valid format, and 4) the wireless device's MAC address has successfully been updated.
-
-It's rather nice; give it a try.
-
-Update: I've crossed off another TODO - I added a MAC address generator option. By using the `--auto` option in lieu of a specific MAC address, the program will generate a valid MAC address per IEEE specifications. Soon, I will add an option that allows the user to specify a vendor prefix for MAC generation. This is becoming a great Layer 2 solution.
-
-Update 0.2.0: I'm excited to have implemented extended functionality for generating not only wholly random (and valid) MAC addresses, but MAC addresses which either begin with a specific vendor prefix (OUI), or are generated with multicast and/or UAA options. These options trigger byte-code logic in the generator method, which are augmented per IEEE specifications. Learn more about MAC addresses [here](https://en.wikipedia.org/wiki/Organizationally_unique_identifier#Bit-reversed_representation).
-
-
-### <a name="networkscanner"></a>  How it Works: ARP-Based Network Scanner ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/network_scanner.py))
-
-The network scanner is another very useful tool, and a formidable one when used in conjunction with the aforementioned MAC changer. This scanner utilizes ARP request functionality by accepting as user input a valid ipv4 or ipv6 IP address and accompanying - albeit optional - subnet range. 
-
-The program then takes the given IP and/or range, then validates them per IEEE
-specifications (again, this validation is run against ipv4 and ipv6 standards). Finally, a broadcast object is instantiated with the given IP and a generated ethernet frame; this object returns to us a list of all connected devices within the given network and accompanying range, mapping their IPs to respective MAC addresses.
-
-The program outputs a table with these associations, which then might be used as input for the MAC changer should circumstances necessitate it.
-
-### <a name="arpspoof"></a>  How it Works: Automated ARP Spoofing ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/arp_spoof.py))
-
-The ARP Spoof program enables us to redirect the flow of packets in a given network by simulateously manipulating the ARP tables of a given target client and its network's gateway. This program auto-enables port forwarding during this process, and dynamically constructs and sends ARP packets.  
-
-When the program is terminated by the user, the targets' ARP tables are reset, so as not to leave the controller in a precarous situation (plus, it's the nice thing to do). 
-
-Because this program places the controller in the middle of the packet-flow between the client and AP, the controller therefore has access to all dataflow (dealing with potential encryption of said data is a task for another script). From here, our myriad options for packet-flow orchestration become readily apparent: surrogation of code by way of automation and regex matching, forced 300-status redirects, remote access, et al.
-
-### <a name="packetsniff"></a>  How it Works: HTTP Packet Sniffer ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/pentesting/packet_sniffer.py))
-
-The packet sniffer is an excellent program to execute after running the ARP Spoofer; it creates a dataflow of all intercepted HTTP packets' data which includes either URLs, or possible user credentials. 
-
-The scipt is extensible and can accomodate a variety of protocols by instantiating the listener object with one of many available filters.
-
 ### <a name="notes"></a> Development Notes
 
-Seems these scripts I've been writing have manifested something new in its own right; I have been drafting the system architecture for a tool which aggregates all of the utilities, payloads, and compilers currently being added to the pentesting sub-directory here in this repository.
-
-You may notice many of these scripts are not yet optimized. Payload code has not been obfuscated, connections are left unencrypted, and many of the programs should be classes. These are tasks I am putting off until I have finished writing all base payloads and utils. Only then will I best be able to plan an object-oriented architecture under which to organize all of this as a single, open-source utility.
