@@ -5,7 +5,7 @@ test.js
 .DS_Store
 chromedriver
 bots/config.json
-*_config.json
+*config.json
 *mac_table.py
 *hello.txt
 *.vscode

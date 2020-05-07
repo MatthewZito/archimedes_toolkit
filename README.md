@@ -4,8 +4,9 @@
 ## Table of Contents
 
  - [Introduction](#intro) 
- - [How it Works: Extensive Password Validation w/SHA1, SHA256, MD5](#passvalidator)
- - [How it Works: Automated Web Monitoring](#shmonitor)
+   * [Documentation](#docs)
+     + [Extensive Password Validation w/SHA1, SHA256, MD5](#passvalidator)
+     + [Automated Web Monitoring](#shmonitor)
  - [Development Notes](#notes)
 
 ### <a name="intro"></a> Introduction
@@ -16,13 +17,15 @@ They may be of use to you. Otherwise, I store these programs and scripts here so
 
 For the remainder of this documentation, I will discuss the more interesting (in my opinion, anyway) among these tools, outlining their design, usage, and implementation theory. If you would like to know more about a program I have yet to document with such a degree of granularity, do let me know and I will add it to this README.
 
-### <a name="passvalidator"></a> How it Works: Extensive Password Validation w/SHA1, SHA256, MD5 ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/automation/pass_validator.py))
+### <a name="docs"></a> Documentation
+
+#### <a name="passvalidator"></a> Local Password Validation w/SHA1, SHA256, MD5 ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/automation/pass_validator.py))
 
 The validator is interesting and I'm pleased with my implementation. Passwords get leaked all the time. My validator accepts as input your actual passes. It first encrypts the pass with SHA1, or MD5 if we are checking against your wireless network (perhaps someone captured a 4-way handshake and has the MD5 hash to your network). Then, the validator strips the hashed pass to five chars, and makes an API call to HaveIBeenPwnd?, perhaps the most robust open database of broken passes. 
 
 We strip to five chars because we don't actually want to make an API request that submits our actual full pass to the remote service. What happens, then, is the API validates against the first five chars of our hashed pass. Then, it returns all matches, which we loop through and match against our full pass (we store the tail in a local variable). This way, actual full pass validation is done locally in our cache. Passes only exist for the session.
 
-### <a name="shmonitor"></a> How it Works: Automated Web Monitoring ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/web-utils/monitor.sh))
+#### <a name="shmonitor"></a> Automated Web Monitoring: Detect Changes on a Given Website ([view source](https://github.com/MatthewZito/archimedes_toolkit/blob/master/web-utils/monitor.sh))
 
 Monitor is a dynamic-input shell script which is intrinsically quite simple but in execution readily subject to the whims of UNIX, cron, and processes. I wrote Monitor after DD missed another record release from her favorite musician. I thought "let's just make a cron job that monitors the page for updates."
 
