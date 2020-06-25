@@ -13,3 +13,8 @@ for filename in os.listdir(input_dir):
     img = Image.open(f'{input_dir}{filename}')
     clean_name = os.path.splitext(filename)[0]
     img.save(f'{output_dir}{clean_name}.png', 'png')
+
+# png to jpg
+# im1 = Image.open(r'path.png')
+# im1 = im1.convert('RGB')
+# im1.save(r'path.jpg')
