@@ -1,13 +1,4 @@
-scripting/images/
-scripting/pngs/
 *pyc
-test.js
 .DS_Store
-chromedriver
-bots/config.json
-*config.json
-*mac_table.py
-*hello.txt
+*chromedriver
 *.vscode
-*pyc
-*.env
