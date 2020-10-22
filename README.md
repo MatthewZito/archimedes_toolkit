@@ -10,12 +10,9 @@
  - [Development Notes](#notes)
 
 ### <a name="intro"></a> Introduction
-This directory contains several custom utilities spanning myriad domains, among them scripting, validation, general I/O applications, and web plugins.
-These utilities are first built in a generalized, 'boilerplate' manner; they are each later expounded upon, in some cases to such a degree that I have published them (e.g. the [pynotes command-line utility](https://github.com/MatthewZito/py_notes), or the [putlocker userscript](https://github.com/MatthewZito/utils/blob/master/web-utils/putlockerstyle.js)).
+A personal /etc repository.
 
-They may be of use to you. Otherwise, I store these programs and scripts here so as to facilitate the aggregation thereof into a scalable, portable library of personal computing utilities. I use them as remote modules quite a bit.
-
-For the remainder of this documentation, I will discuss the more interesting (in my opinion, anyway) among these tools, outlining their design, usage, and implementation theory. If you would like to know more about a program I have yet to document with such a degree of granularity, do let me know and I will add it to this README.
+This directory contains several custom utilities spanning myriad domains, among them scripting, validation, general I/O applications, web plugins, and code golf.
 
 ### <a name="docs"></a> Documentation
 
